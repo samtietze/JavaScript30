@@ -58,7 +58,28 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  playAudio = (key) => {
+    let audioToPlay = document.querySelector(`audio[data-key="${key}"]`);
+    audioToPlay ? audioToPlay.play() : null;
+  }
 
+  makeWithTheDrums = (e) => {
+    let pressedKey = e.keyCode;
+    const keyToHighlight = document.querySelector(`.key[data-key="${pressedKey}"]`);
+    console.log(`pressed key: ${pressedKey}`);
+    keyToHighlight ? keyToHighlight.classList.add("playing") : null;
+    playAudio(pressedKey);
+    }
+  
+  quitItWithTheDrums = (e) => {
+    const pressedKey = e.keyCode;
+    const keyToReset = document.querySelector(`.key[data-key="${pressedKey}"]`);
+    console.log(`key let go: ${pressedKey}`);
+    keyToReset ? keyToReset.classList.remove('playing') : null;
+  }
+
+  window.addEventListener('keydown', makeWithTheDrums);
+  window.addEventListener('keyup', quitItWithTheDrums);
 </script>
 
 

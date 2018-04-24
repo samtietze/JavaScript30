@@ -58,25 +58,29 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-  const buttonContainer = document.querySelector(".keys");
-  const musicButtons = buttonContainer.querySelectorAll(".key");
-
-  window.addEventListener('keydown', (e) => {
-    const pressedKey = e.keyCode;
-    const keyToHighlight = buttonContainer.querySelector(`[data-key="${pressedKey}"]`);
-    console.log(`pressed key: ${pressedKey}`);
-    keyToHighlight ? keyToHighlight.classList.add('playing') : null;
-
-    const audioToPlay = document.querySelector(`audio[data-key="${pressedKey}"]`);
+  playAudio = (key) => {
+    let audioToPlay = document.querySelector(`audio[data-key="${key}"]`);
     audioToPlay ? audioToPlay.play() : null;
-  })
-  window.addEventListener('keyup', (e) => {
+  }
+
+  makeWithTheDrums = (e) => {
+    let pressedKey = e.keyCode;
+    
+    const keyToHighlight = document.querySelector(`.keys[data-key="${pressedKey}"]`);
+    console.log(`pressed key: ${pressedKey}`);
+    keyToHighlight ? keyToHighlight.classList.add("playing") : null;
+    playAudio(pressedKey);
+    }
+  
+  quitItWithTheDrums = (e) => {
     const pressedKey = e.keyCode;
-    const keyToReset = buttonContainer.querySelector(`[data-key="${pressedKey}"]`);
+    const keyToReset = document.querySelector(`.keys[data-key="${pressedKey}"]`);
     console.log(`key let go: ${pressedKey}`);
     keyToReset ? keyToReset.classList.remove('playing') : null;
-  })
-  // window.addEventListener('keydown', (e) => {console.log(e.keyCode);});
+  }
+
+  window.addEventListener('keydown', makeWithTheDrums);
+  window.addEventListener('keyup', quitItWithTheDrums);
 </script>
 
 

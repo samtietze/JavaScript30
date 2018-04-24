@@ -59,12 +59,13 @@
 
 <script>
   playAudio = (key) => {
-    let audioToPlay = document.querySelector(`audio[data-key="${key}"]`);
+    const audioToPlay = document.querySelector(`audio[data-key="${key}"]`);
+    audioToPlay ? audioToPlay.currentTime = 0 : null;
     audioToPlay ? audioToPlay.play() : null;
   }
 
   makeWithTheDrums = (e) => {
-    let pressedKey = e.keyCode;
+    const pressedKey = e.keyCode;
     const keyToHighlight = document.querySelector(`.key[data-key="${pressedKey}"]`);
     console.log(`pressed key: ${pressedKey}`);
     keyToHighlight ? keyToHighlight.classList.add("playing") : null;

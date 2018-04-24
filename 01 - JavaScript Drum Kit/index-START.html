@@ -65,8 +65,7 @@
 
   makeWithTheDrums = (e) => {
     let pressedKey = e.keyCode;
-    
-    const keyToHighlight = document.querySelector(`.keys[data-key="${pressedKey}"]`);
+    const keyToHighlight = document.querySelector(`.key[data-key="${pressedKey}"]`);
     console.log(`pressed key: ${pressedKey}`);
     keyToHighlight ? keyToHighlight.classList.add("playing") : null;
     playAudio(pressedKey);
@@ -74,7 +73,7 @@
   
   quitItWithTheDrums = (e) => {
     const pressedKey = e.keyCode;
-    const keyToReset = document.querySelector(`.keys[data-key="${pressedKey}"]`);
+    const keyToReset = document.querySelector(`.key[data-key="${pressedKey}"]`);
     console.log(`key let go: ${pressedKey}`);
     keyToReset ? keyToReset.classList.remove('playing') : null;
   }

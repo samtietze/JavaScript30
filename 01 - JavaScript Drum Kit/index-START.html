@@ -58,7 +58,25 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  const buttonContainer = document.querySelector(".keys");
+  const musicButtons = buttonContainer.querySelectorAll(".key");
 
+  window.addEventListener('keydown', (e) => {
+    const pressedKey = e.keyCode;
+    const keyToHighlight = buttonContainer.querySelector(`[data-key="${pressedKey}"]`);
+    console.log(`pressed key: ${pressedKey}`);
+    keyToHighlight ? keyToHighlight.classList.add('playing') : null;
+
+    const audioToPlay = document.querySelector(`audio[data-key="${pressedKey}"]`);
+    audioToPlay ? audioToPlay.play() : null;
+  })
+  window.addEventListener('keyup', (e) => {
+    const pressedKey = e.keyCode;
+    const keyToReset = buttonContainer.querySelector(`[data-key="${pressedKey}"]`);
+    console.log(`key let go: ${pressedKey}`);
+    keyToReset ? keyToReset.classList.remove('playing') : null;
+  })
+  // window.addEventListener('keydown', (e) => {console.log(e.keyCode);});
 </script>
 
 

@@ -84,11 +84,11 @@
       }
       return timeSteps[timeUnit];
     } 
-    
+
     let currentSecond = setInitialTime("seconds");
     let currentMinute = setInitialTime("minutes");
     let currentHour = setInitialTime("hours");
-
+    
     incrementSecondHand = () => {
       return currentSecond += 6;
     }
@@ -96,9 +96,8 @@
       return currentMinute += 6;
     }
     incrementHourHand = () => {
-      return currentHour += 6;
+      return currentHour += 30;
     }
-
     transformHandElement = (hand, timeUnit) => {
       return hand.style.transform = `rotate(${timeUnit}deg)`;
     }
@@ -107,15 +106,14 @@
       transformHandElement(secondHand, currentSecond);
       transformHandElement(minuteHand, currentMinute);
       transformHandElement(hourHand, currentHour);
-      if ((450 / currentSecond) === 1) {
+      if ((currentSecond % 450 === 0)) {
         incrementSecondHand();
         incrementMinuteHand();
-      } else if ((450 / currentMinute) === 1){
+      } else if ((currentMinute % 450 === 0)){
         incrementHourHand();
         incrementMinuteHand();
         incrementSecondHand();
-      }
-      else {
+      } else {
         incrementSecondHand();
       }
     }

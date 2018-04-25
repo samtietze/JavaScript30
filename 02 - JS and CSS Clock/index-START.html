@@ -74,33 +74,49 @@
     const secondHand = document.querySelector(".second-hand");
     const minuteHand = document.querySelector(".min-hand");
     const hourHand = document.querySelector(".hour-hand");
-    // this seems no good
-    // secondHand.style.transform = "rotate(90deg)";
-    // minuteHand.style.transform = "rotate(90deg)";
-    // hourHand.style.transform = "rotate(90deg)";
 
-    const initialTime = new Date();
+    setInitialTime = (timeUnit) => {
+      const initialTime = new Date();
+      const timeSteps = {
+        "seconds": 90 + (6 * (initialTime.getSeconds())),
+        "minutes": 90 + (6 * (initialTime.getMinutes())),
+        "hours": 90 + (30 * (initialTime.getHours()))
+      }
+      return timeSteps[timeUnit];
+    } 
+    
+    let currentSecond = setInitialTime("seconds");
+    let currentMinute = setInitialTime("minutes");
+    let currentHour = setInitialTime("hours");
 
-    let currentSecond = 90 + (6 * (initialTime.getSeconds()));
-    let currentMinute = 90 + (6 * (initialTime.getMinutes()));
-    let currentHour = 90 + (30 * (initialTime.getHours()));
+    incrementSecondHand = () => {
+      return currentSecond += 6;
+    }
+    incrementMinuteHand = () => {
+      return currentMinute += 6;
+    }
+    incrementHourHand = () => {
+      return currentHour += 6;
+    }
 
+    transformHandElement = (hand, timeUnit) => {
+      return hand.style.transform = `rotate(${timeUnit}deg)`;
+    }
 
     setTime = () => {
-      console.log(`starting: ${currentSecond}`);
-      secondHand.style.transform = `rotate(${currentSecond}deg)`;
-      minuteHand.style.transform = `rotate(${currentMinute}deg)`;
-      hourHand.style.transform = `rotate(${currentHour}deg)`;
+      transformHandElement(secondHand, currentSecond);
+      transformHandElement(minuteHand, currentMinute);
+      transformHandElement(hourHand, currentHour);
       if ((450 / currentSecond) === 1) {
-        currentMinute += 6;
-        currentSecond += 6;
+        incrementSecondHand();
+        incrementMinuteHand();
       } else if ((450 / currentMinute) === 1){
-        currentHour += 30;
-        currentMinute += 6;
-        currentSecond += 6;
+        incrementHourHand();
+        incrementMinuteHand();
+        incrementSecondHand();
       }
       else {
-        currentSecond += 6;
+        incrementSecondHand();
       }
     }
 

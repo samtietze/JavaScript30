@@ -63,7 +63,7 @@
       position: absolute;
       top:50%;
       transform-origin: 100%;
-      /* transform: rotate(90deg); */
+      transform: rotate(90deg);
       transition: all 0.05s;
       transition-timing-function: cubic-bezier(0.03, 2.87, 0.58, 1);
     }
@@ -74,18 +74,34 @@
     const secondHand = document.querySelector(".second-hand");
     const minuteHand = document.querySelector(".min-hand");
     const hourHand = document.querySelector(".hour-hand");
+    // this seems no good
+    // secondHand.style.transform = "rotate(90deg)";
+    // minuteHand.style.transform = "rotate(90deg)";
+    // hourHand.style.transform = "rotate(90deg)";
 
-    const currentTime = new Date();
-    let rotation = 90 + currentTime.getSeconds();
-    console.log(rotation);
+    const initialTime = new Date();
+
+    let currentSecond = 90 + (6 * (initialTime.getSeconds()));
+    let currentMinute = 90 + (6 * (initialTime.getMinutes()));
+    let currentHour = 90 + (30 * (initialTime.getHours()));
+
 
     setTime = () => {
-      console.log(`starting: ${rotation}`);
-
-      secondHand.style.transform = `rotate(${rotation})`;
-      console.log(secondHand.style.transform = `rotate(${rotation}deg)`);
-
-      rotation += 6; 
+      console.log(`starting: ${currentSecond}`);
+      secondHand.style.transform = `rotate(${currentSecond}deg)`;
+      minuteHand.style.transform = `rotate(${currentMinute}deg)`;
+      hourHand.style.transform = `rotate(${currentHour}deg)`;
+      if ((450 / currentSecond) === 1) {
+        currentMinute += 6;
+        currentSecond += 6;
+      } else if ((450 / currentMinute) === 1){
+        currentHour += 30;
+        currentMinute += 6;
+        currentSecond += 6;
+      }
+      else {
+        currentSecond += 6;
+      }
     }
 
     setInterval(setTime, 1000);

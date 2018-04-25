@@ -30,6 +30,7 @@
     img {
       padding: var(--spacing);
       background-color: var(--base);
+      filter: blur(var(--blur));
     }
 
     .hl {
@@ -59,6 +60,18 @@
   </style>
 
   <script>
+    const body = document.querySelector("body");
+    const spacingSlider = document.getElementById("spacing")
+    const blurSlider = document.getElementById("blur")
+    const colorPicker = document.getElementById("base")
+    console.log(blurSlider);
+
+    doSomething = (e) => {
+      console.log(e.target.value)
+      body.style.setProperty('--blur', `${e.target.value}px`)
+    }
+
+    blurSlider.addEventListener("input", doSomething);
   </script>
 
 </body>

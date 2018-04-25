@@ -106,10 +106,10 @@
       transformHandElement(secondHand, currentSecond);
       transformHandElement(minuteHand, currentMinute);
       transformHandElement(hourHand, currentHour);
-      if ((currentSecond % 450 === 0)) {
+      if ((currentSecond % 360 === 90)) {
         incrementSecondHand();
         incrementMinuteHand();
-      } else if ((currentMinute % 450 === 0)){
+      } else if ((currentMinute % 360 === 90)){
         incrementHourHand();
         incrementMinuteHand();
         incrementSecondHand();

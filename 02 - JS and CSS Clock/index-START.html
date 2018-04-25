@@ -74,8 +74,6 @@
     const secondHand = document.querySelector(".second-hand");
     const minuteHand = document.querySelector(".min-hand");
     const hourHand = document.querySelector(".hour-hand");
-    let secondTicks = new Date().getSeconds();
-    let minuteTicks = new Date().getMinutes();
 
     setInitialTime = (timeUnit) => {
       const initialTime = new Date();
@@ -91,21 +89,15 @@
     let currentMinute = setInitialTime("minutes");
     let currentHour = setInitialTime("hours");
     
-
     incrementSecondHand = () => {
-      secondTicks === 60 ? secondTicks = 0 : secondTicks += 1;
-      console.log(secondTicks);
       return currentSecond += 6;
     }
     incrementMinuteHand = () => {
-      minuteTicks === 60 ? minuteTicks = 0 : minuteTicks += 1;
-      console.log(minuteTicks);
       return currentMinute += 6;
     }
     incrementHourHand = () => {
-      return currentHour += 6;
+      return currentHour += 30;
     }
-
     transformHandElement = (hand, timeUnit) => {
       return hand.style.transform = `rotate(${timeUnit}deg)`;
     }
@@ -114,15 +106,14 @@
       transformHandElement(secondHand, currentSecond);
       transformHandElement(minuteHand, currentMinute);
       transformHandElement(hourHand, currentHour);
-      if (secondTicks === 60) {
+      if ((currentSecond % 450 === 0)) {
         incrementSecondHand();
         incrementMinuteHand();
-      } else if (minuteTicks === 60){
+      } else if ((currentMinute % 450 === 0)){
         incrementHourHand();
         incrementMinuteHand();
         incrementSecondHand();
-      }
-      else {
+      } else {
         incrementSecondHand();
       }
     }

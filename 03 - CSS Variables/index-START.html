@@ -67,11 +67,17 @@
     console.log(blurSlider);
 
     doSomething = (e) => {
-      console.log(e.target.value)
-      body.style.setProperty('--blur', `${e.target.value}px`)
+      console.log(e.target.id)
+      if(e.target.id === "blur"){
+        body.style.setProperty('--blur', `${e.target.value}px`)
+      } else if (e.target.id === "spacing") {
+        body.style.setProperty('--spacing', `${e.target.value}px`)
+      } else if (e.target.id === "base"){
+        body.style.setProperty('--base', `${e.target.value}`)
+      }
     }
 
-    blurSlider.addEventListener("input", doSomething);
+    body.addEventListener("input", doSomething);
   </script>
 
 </body>
